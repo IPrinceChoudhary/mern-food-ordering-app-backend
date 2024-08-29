@@ -4,6 +4,7 @@ import "dotenv/config";
 import mongoose from "mongoose";
 import myUserRoute from "./routes/MyUserRoute"
 import myRestaurantRoute from "./routes/MyRestaurantRoute"
+import restaurantRoute from "./routes/RestaurantRoute"
 import {v2 as cloudinary} from 'cloudinary'
 
 mongoose.connect(process.env.MONGODB_CONNECTION_STRING as string).then(()=>console.log("connected to db"))
@@ -24,6 +25,7 @@ app.get("/health", async (req: Request, res: Response)=>{
 
 app.use("/api/my/user", myUserRoute) // using my in a route indicates that these routes are related to something with the current logged in user, one of the convention in REST API
 app.use("/api/my/restaurant", myRestaurantRoute)
+app.use("/api/restaurant", restaurantRoute)
 
 app.listen(7000,()=>{
   console.log("started in 7000")
